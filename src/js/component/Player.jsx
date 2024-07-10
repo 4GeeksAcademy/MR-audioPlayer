@@ -6,13 +6,14 @@ const Player = () => {
   return (
     <>
       <div className="container-player d-flex justify-content-center align-items-center">
-        <button>
+        <button className="buttonFowardBackward">
           <FontAwesomeIcon icon="fa-solid fa-backward-step" />
         </button>
-        <button>
+        <button className="buttonPlay">
           <FontAwesomeIcon icon="fa-solid fa-play" />
+          <FontAwesomeIcon icon="fa-solid fa-pause" />
         </button>
-        <button>
+        <button className="buttonFowardBackward">
           <FontAwesomeIcon icon="fa-solid fa-forward-step" />
         </button>
       </div>
