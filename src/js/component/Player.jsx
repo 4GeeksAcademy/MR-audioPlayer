@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Player = () => {
   const [Songs, setSongs] = useState();
 

@@ -1,16 +1,15 @@
 import React from "react";
 
-const List = () => {
+const List = ({ songs, onSongSelect }) => {
   return (
     <>
       <div className="container-list d-flex  align-items-start">
         <ul className="hover-song">
-          <li>cancion</li>
-          <li>cancion</li>
-          <li>cancion</li>
-          <li>cancion</li>
-          <li>cancion</li>
-          <li>cancion</li>
+          {songs.map((song, index) => (
+            <li key={index} onClick={() => onSongSelect(song)}>
+              {song.title}
+            </li>
+          ))}
         </ul>
       </div>
     </>
