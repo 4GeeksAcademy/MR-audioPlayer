@@ -1,23 +1,37 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
-const Player = () => {
-  const [Songs, setSongs] = useState();
+const Player = ({ currentSong }) => {
+  const audioRef = useRef(null);
 
+  useEffect(() => {
+    if (currentSong && audioRef.current) {
+      audioRef.current.src = currentSong.url;
+      audioRef.current.play();
+    }
+  }, [currentSong]);
+
+  const handlePlayPause = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  };
   return (
-    <>
-      <div className="container-player d-flex justify-content-center align-items-center">
-        <button className="buttonFowardBackward">
-          <FontAwesomeIcon icon="fa-solid fa-backward-step" />
-        </button>
-        <button className="buttonPlay">
-          <FontAwesomeIcon icon="fa-solid fa-play" />
-          <FontAwesomeIcon icon="fa-solid fa-pause" />
-        </button>
-        <button className="buttonFowardBackward">
-          <FontAwesomeIcon icon="fa-solid fa-forward-step" />
-        </button>
-      </div>
-    </>
+    <div>
+      {currentSong ? (
+        <>
+          <h2>Now Playing: {currentSong.name}</h2>
+          <audio ref={audioRef} controls />
+          <button onClick={handlePlayPause}>Play/Pause</button>
+          <button onClick={() => handleSkip("prev")}>Previous</button>
+          <button onClick={() => handleSkip("next")}>Next</button>
+        </>
+      ) : (
+        <p>Select a song to play</p>
+      )}
+    </div>
   );
 };
+
 export default Player;

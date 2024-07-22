@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const List = ({ songs, onSongSelect }) => {
+const List = ({ setCurrentSong }) => {
+  const [songs, setSongs] = useState([]);
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+      try {
+        const response = await fetch(
+          "https://playground.4geeks.com/sound/songs"
+        );
+        const data = await response.json();
+        setSongs(data.songs || []);
+      } catch (error) {
+        console.error("Error fetching songs:", error);
+      }
+    };
+
+    fetchSongs();
+  }, []);
   return (
-    <>
-      <div className="container-list d-flex  align-items-start">
-        <ul className="hover-song">
-          {songs.map((song, index) => (
-            <li key={index} onClick={() => onSongSelect(song)}>
-              {song.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div>
+      <ul>
+        {songs.map((song) => (
+          <li key={song.id}>
+            <button onClick={() => setCurrentSong(song)}>{song.name}</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
+
 export default List;
