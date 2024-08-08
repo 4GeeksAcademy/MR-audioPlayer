@@ -4,10 +4,11 @@ import Player from "./Player";
 
 const Home = () => {
   const [currentSong, setCurrentSong] = useState(null);
+  console.log("Home: setCurrentSong", setCurrentSong);
   return (
     <>
-      <List />
-      <Player />
+      <List setCurrentSong={setCurrentSong} />
+      <Player currentSong={currentSong} />
     </>
   );
 };

@@ -18,6 +18,7 @@ const List = ({ setCurrentSong }) => {
 
     fetchSongs();
   }, []);
+  console.log("List: setCurrentSong", setCurrentSong);
   return (
     <div>
       <ul>

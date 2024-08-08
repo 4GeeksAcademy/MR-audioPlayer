@@ -23,8 +23,8 @@ const Player = ({ currentSong }) => {
         <>
           <h2>Now Playing: {currentSong.name}</h2>
           <audio ref={audioRef} controls />
-          <button onClick={handlePlayPause}>Play/Pause</button>
           <button onClick={() => handleSkip("prev")}>Previous</button>
+          <button onClick={handlePlayPause}>Play/Pause</button>
           <button onClick={() => handleSkip("next")}>Next</button>
         </>
       ) : (
