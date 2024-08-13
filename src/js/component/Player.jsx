@@ -1,4 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlay,
+  faPause,
+  faForward,
+  faBackward,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Player = ({ currentSong }) => {
   const audioRef = useRef(null);
@@ -17,15 +24,30 @@ const Player = ({ currentSong }) => {
       audioRef.current.pause();
     }
   };
+  const handlenextSong = () => {};
+  const handlePrevSong = () => {};
+
   return (
-    <div>
+    <div className="player-container">
       {currentSong ? (
         <>
-          <h2>Now Playing: {currentSong.name}</h2>
-          <audio ref={audioRef} controls />
-          <button onClick={() => handleSkip("prev")}>Previous</button>
-          <button onClick={handlePlayPause}>Play/Pause</button>
-          <button onClick={() => handleSkip("next")}>Next</button>
+          <h2 className="current-song">{currentSong.name}</h2>
+          <div className="current-song">
+            <audio ref={audioRef} controls className="current-song" />
+          </div>
+          <div className="current-song">
+            <button onClick={handlePrevSong} className="player-button">
+              <FontAwesomeIcon icon={faBackward} />
+            </button>
+            <button onClick={handlePlayPause} className="player-button">
+              <FontAwesomeIcon
+                icon={audioRef.current?.paused ? faPlay : faPause}
+              />
+            </button>
+            <button onClick={handlenextSong} className="player-button">
+              <FontAwesomeIcon icon={faForward} />
+            </button>
+          </div>
         </>
       ) : (
         <p>Select a song to play</p>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../../styles/index.css";
 
 const List = ({ setCurrentSong }) => {
   const [songs, setSongs] = useState([]);
@@ -18,16 +19,18 @@ const List = ({ setCurrentSong }) => {
 
     fetchSongs();
   }, []);
-  console.log("List: setCurrentSong", setCurrentSong);
+  console.log("List: setCurrentSong", setCurrentSong); // comprobar fetch listado de canciones
   return (
-    <div>
-      <ul>
-        {songs.map((song) => (
-          <li key={song.id}>
-            <button onClick={() => setCurrentSong(song)}>{song.name}</button>
-          </li>
-        ))}
-      </ul>
+    <div className="song-list">
+      {songs.map((song) => (
+        <li style={{ listStyleType: "none" }} key={song.id}>
+          <div>
+            <button onClick={() => setCurrentSong(song)} className="song-style">
+              {song.id} {song.name} -
+            </button>
+          </div>
+        </li>
+      ))}
     </div>
   );
 };
