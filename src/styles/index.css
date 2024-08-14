@@ -17,6 +17,9 @@ body {
   width: 100%;
   flex: 1;
 }
+.song-style:hover {
+  background-color: #6d6c6c;
+}
 
 .current-song {
   text-align: center;
