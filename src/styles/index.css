@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 500px;
+  overflow-y: scroll;
 }
 
 .song-style {
@@ -12,13 +13,16 @@ body {
   border-bottom: 1px solid #6c6a6a;
   background-color: black;
   color: aliceblue;
-  font-size: 30px;
+  font-size: 20px;
   text-align: start;
   width: 100%;
   flex: 1;
 }
 .song-style:hover {
   background-color: #6d6c6c;
+}
+.song-style:focus {
+  background-color: #635d5d;
 }
 
 .current-song {
