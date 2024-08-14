@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -7,52 +7,66 @@ import {
   faBackward,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Player = ({ currentSong }) => {
+const Player = ({ currentSong, playSong, songIndex, songList }) => {
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (currentSong && audioRef.current) {
       audioRef.current.src = currentSong.url;
       audioRef.current.play();
+      setIsPlaying(true);
     }
   }, [currentSong]);
 
   const handlePlayPause = () => {
     if (audioRef.current.paused) {
       audioRef.current.play();
+      setIsPlaying(true);
     } else {
       audioRef.current.pause();
+      setIsPlaying(false);
     }
   };
-  const handlenextSong = () => {};
-  const handlePrevSong = () => {};
+
+  const handleNextSong = () => {
+    let nextIndex = songIndex + 1;
+    if (nextIndex >= songList.length) {
+      nextIndex = 0;
+    }
+    playSong(nextIndex);
+  };
+
+  const handlePrevSong = () => {
+    let prevIndex = songIndex - 1;
+    if (prevIndex < 0) {
+      prevIndex = songList.length - 1;
+    }
+    playSong(prevIndex);
+  };
 
   return (
-    <div className="player-container">
-      {currentSong ? (
-        <>
-          <h2 className="current-song">{currentSong.name}</h2>
-          <div className="current-song">
-            <audio ref={audioRef} controls className="current-song" />
-          </div>
-          <div className="current-song">
-            <button onClick={handlePrevSong} className="player-button">
-              <FontAwesomeIcon icon={faBackward} />
-            </button>
-            <button onClick={handlePlayPause} className="player-button">
-              <FontAwesomeIcon
-                icon={audioRef.current?.paused ? faPlay : faPause}
-              />
-            </button>
-            <button onClick={handlenextSong} className="player-button">
-              <FontAwesomeIcon icon={faForward} />
-            </button>
-          </div>
-        </>
-      ) : (
-        <p>Select a song to play</p>
-      )}
-    </div>
+    <>
+      <div className="footer">
+        <h2 className="current-song">
+          {currentSong ? currentSong.name : "Select a song to play"}
+        </h2>
+        <div className="audio-container">
+          <audio ref={audioRef} />
+        </div>
+        <div className="current-song">
+          <button onClick={handlePrevSong} className="player-button">
+            <FontAwesomeIcon icon={faBackward} />
+          </button>
+          <button onClick={handlePlayPause} className="player-button">
+            <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+          </button>
+          <button onClick={handleNextSong} className="player-button">
+            <FontAwesomeIcon icon={faForward} />
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 
