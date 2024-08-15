@@ -1,12 +1,61 @@
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  overflow-y: scroll;
+}
 
-/* 
+.song-style {
+  border-top: 1px solid #6c6a6a;
+  border-bottom: 1px solid #6c6a6a;
+  background-color: black;
+  color: aliceblue;
+  font-size: 20px;
+  text-align: start;
+  width: 100%;
+  flex: 1;
+}
+.song-style:hover {
+  background-color: #6d6c6c;
+}
+.song-style:focus {
+  background-color: #635d5d;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.current-song {
+  text-align: center;
+}
 
-*/
+.footer {
+  background-color: #413f3f;
+  color: aliceblue;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.player-button {
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  cursor: pointer;
+  color: #666666;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+  margin: 5px;
+}
+.highlighted {
+  background-color: #666666;
+}
