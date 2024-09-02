@@ -7,15 +7,21 @@ import {
   faBackward,
 } from "@fortawesome/free-solid-svg-icons";
 
+const baseUrl = "https://playground.4geeks.com";
+
 const Player = ({ currentSong, playSong, songIndex, songList }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (currentSong && audioRef.current) {
-      audioRef.current.src = currentSong.url;
-      audioRef.current.play();
-      setIsPlaying(true);
+      const fullUrl = `${baseUrl}${currentSong.url}`;
+      console.log("Playing song from URL:", fullUrl);
+      audioRef.current.src = fullUrl;
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch((error) => console.error("Error playing song:", error));
     }
   }, [currentSong]);
 
